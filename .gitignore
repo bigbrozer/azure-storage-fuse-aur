@@ -1,3 +1,4 @@
 pkg/
 src/
-/azure-storage-fuse-*.tar.*
+/azure-storage-fuse-*
+/blobfuse2-*
