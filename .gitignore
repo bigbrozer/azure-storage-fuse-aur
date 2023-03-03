@@ -1,4 +1,7 @@
-pkg/
-src/
-/azure-storage-fuse-*
-/blobfuse2-*
+*
+!/.gitignore
+!/PKGBUILD
+!/.editorconfig
+!/Makefile
+!/README.md
+!/.SRCINFO
