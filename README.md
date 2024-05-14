@@ -18,7 +18,8 @@ make
 
 > You will need `pipx install nvchecker` before !
 
-1. Run `nvcmp -c .nvchecker.toml` to verify newer versions.
+1. Run `make check-updates` to verify newer versions.
 2. Bump related `pkgver` in `PKGBUILD`.
 3. Run `make`.
-4. Commit and push.
+4. Run `make take-updates`.
+5. Commit and push.

@@ -27,6 +27,14 @@ clean:
 .PHONY: dist-clean
 dist-clean: clean
 
+.PHONY: check-updates
+check-updates:
+	@nvcmp -c .nvchecker.toml
+
+.PHONY: take-updates
+take-updates:
+	@nvtake -c .nvchecker.toml azure-storage-fuse
+
 #-------------------------------------------------------------------------------
 # FILES
 #-------------------------------------------------------------------------------
