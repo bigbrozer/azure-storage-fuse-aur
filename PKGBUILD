@@ -36,8 +36,17 @@ build() {
 package() {
   cd "${srcdir}/$pkgname-$_pkgname-$pkgver"
 
-  install -d "${pkgdir}/usr/share/doc/$pkgname"
-  install -Dm0755 $_pkgname "${pkgdir}/usr/bin/$_pkgname"
-  install -m0644 README.md doc/*.md "${pkgdir}/usr/share/doc/$pkgname/"
-  install -Dm0644 LICENSE "${pkgdir}/usr/share/licenses/$pkgname/LICENSE"
+  install -d "${pkgdir}/usr/share/doc/${pkgname}"
+  install -Dm0755 "${_pkgname}" "${pkgdir}/usr/bin/${_pkgname}"
+  install -m0644 README.md doc/*.md "${pkgdir}/usr/share/doc/${pkgname}/"
+  install -Dm0644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+
+  # Install shell completion scripts
+  install -d "${srcdir}/completions"
+  "${pkgdir}/usr/bin/blobfuse2" completion bash > "${srcdir}/completions/${_pkgname}"
+  "${pkgdir}/usr/bin/blobfuse2" completion fish > "${srcdir}/completions/${_pkgname}.fish"
+  "${pkgdir}/usr/bin/blobfuse2" completion zsh > "${srcdir}/completions/_${_pkgname}"
+  install -Dm 644 "${srcdir}/completions/${_pkgname}" -t "${pkgdir}/usr/share/bash-completion/completions/"
+  install -Dm 644 "${srcdir}/completions/${_pkgname}.fish" -t "${pkgdir}/usr/share/fish/vendor_completions.d/"
+  install -Dm 644 "${srcdir}/completions/_${_pkgname}" -t "${pkgdir}/usr/share/zsh/site-functions/"
 }
