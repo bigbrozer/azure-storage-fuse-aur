@@ -13,7 +13,7 @@ export LANG = C
 #-------------------------------------------------------------------------------
 
 .PHONY: all
-all: clean checksum $(PKGFILE)
+all: clean check-updates take-updates checksum $(PKGFILE)
 
 .PHONY: checksum
 checksum:
@@ -29,11 +29,13 @@ dist-clean: clean
 
 .PHONY: check-updates
 check-updates:
+	@nvchecker -c .nvchecker.toml
 	@nvcmp -c .nvchecker.toml
 
 .PHONY: take-updates
 take-updates:
 	@nvtake -c .nvchecker.toml azure-storage-fuse
+	@sed -i -r -e "s/^pkgver=[0-9.]+\$$/pkgver=$(shell jq -r '.data."azure-storage-fuse".version' < .nvchecker.next.json)/g" PKGBUILD
 
 #-------------------------------------------------------------------------------
 # FILES
