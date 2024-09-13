@@ -3,7 +3,7 @@
 # Blobfuse2 version is rewritten in Go, inspiration from https://aur.archlinux.org/packages/pluto.
 _pkgname=blobfuse2
 pkgname=azure-storage-fuse
-pkgver=2.3.0
+pkgver=2.3.2
 pkgrel=1
 pkgdesc="A virtual file system adapter for Azure Blob storage (blobfuse2)"
 arch=('x86_64')
@@ -13,7 +13,7 @@ provides=('blobfuse2')
 depends=('fuse2' 'fuse3' 'glibc')
 makedepends=('go')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/Azure/azure-storage-fuse/archive/refs/tags/blobfuse2-$pkgver.tar.gz")
-sha256sums=('9e7c3b98c4967d45405a4b9450fb3e90e329ffefaef1ffa0e6cedfd66991881b')
+sha256sums=('018c23c7d2e3216392a3afc3b30e7d3836e6e6f552735bc64d3d77771aa6fb9f')
 
 build() {
   cd "${srcdir}/$pkgname-$_pkgname-$pkgver"
