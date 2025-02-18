@@ -7,3 +7,6 @@
 !/Makefile
 !/README.md
 !/.SRCINFO
+!/pyproject.toml
+!/uv.lock
+!/.python-version

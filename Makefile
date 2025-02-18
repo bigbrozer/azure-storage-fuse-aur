@@ -4,7 +4,7 @@ PKGVER := $(shell awk -F= '/^pkgver=/ {print $$2}' PKGBUILD)
 PKGREL := $(shell awk -F= '/^pkgrel=/ {print $$2}' PKGBUILD)
 PKGFILE := $(PKGNAME)-$(PKGVER)-$(PKGREL)-x86_64.pkg.tar.zst
 PKGURL := https://github.com/Azure/azure-storage-fuse/archive/refs/tags/blobfuse2-$(PKGVER).tar.gz
-CHECKSUM = $(shell https -qd "$(PKGURL)" | sha256sum - | cut -d" " -f1)
+CHECKSUM = $(shell uv run https -qd "$(PKGURL)" | sha256sum - | cut -d" " -f1)
 
 export LANG = C
 
@@ -29,13 +29,14 @@ dist-clean: clean
 
 .PHONY: check-updates
 check-updates:
-	@nvchecker -c .nvchecker.toml
-	@nvcmp -c .nvchecker.toml
+	@uv run nvchecker -c .nvchecker.toml
+	@uv run nvcmp -c .nvchecker.toml
 
 .PHONY: take-updates
 take-updates:
-	@nvtake -c .nvchecker.toml azure-storage-fuse
+	@uv run nvtake -c .nvchecker.toml azure-storage-fuse
 	@sed -i -r -e "s/^pkgver=[0-9.]+\$$/pkgver=$(shell jq -r '.data."azure-storage-fuse".version' < .nvchecker.next.json)/g" PKGBUILD
+	@sed -i -r -e "s/^version = \"[0-9.]+\"\$$/version = \"$(shell jq -r '.data."azure-storage-fuse".version' < .nvchecker.next.json)\"/g" pyproject.toml
 
 #-------------------------------------------------------------------------------
 # FILES

@@ -6,19 +6,12 @@ This is an AUR package for [Azure/azure-storage-fuse](https://github.com/Azure/a
 
 ## Build
 
-To build the package, ensure you have make dependencies (`makedepends`) installed first.
+Requirements:
 
-Build the package with:
+* Install [`uv`](https://docs.astral.sh/uv/).
+* Install make dependencies (`makedepends`).
 
-```sh
-make
-```
+Build and update with:
 
-## Release
-
-> You will need `pipx install nvchecker` before !
-
-1. Run `make check-updates` to verify newer versions.
-2. Run `make take-updates` to apply latest version.
-3. Run `make`.
-4. Commit and push.
+1. Run `make`.
+2. Commit and push.
